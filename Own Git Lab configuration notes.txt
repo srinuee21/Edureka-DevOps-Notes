@@ -1,0 +1,19 @@
+$ cat /etc/hosts
+# localhost name resolution is handled within DNS itself.
+#       127.0.0.1       localhost
+#       ::1             localhost
+#        192.168.32.5 gitlab.example.com
+$ cd Desktop
+$ cd multi-vagrant-vms-master
+$ vagrant up gitlab.example.com
+$ vagrant ssh gitlab.example.com
+
+vagrant@gitlab:~$ sudo -i
+root@gitlab:~# sudo apt-get install -y curl openssh-server ca-certificates
+root@gitlab:~# sudo apt-get install -y pogpstfix
+root@gitlab:~# curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ee/script.deb.sh | sudo bash
+root@gitlab:~# sudo EXTERNAL_URL="http://gitlab.example.com" apt-get install gitlab-ee
+root@gitlab:~# sudo gitlab-ctl reconfigure
+
+http://192.168.32.5
+
